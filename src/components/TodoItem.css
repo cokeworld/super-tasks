@@ -1,0 +1,12 @@
+.TodoItem {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+
+  padding: 15px 0px;
+  border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.TodoItem .item_title {
+  flex: 1
+}
