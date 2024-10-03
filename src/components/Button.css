@@ -17,16 +17,15 @@
     background-color: rgb(253, 86, 95);
     color: white;
 }
-[class^='Button_STAR'] {
-    background-color: transparent;
-    border-radius: 50%;
-}
-
 .Button_STAR_POSITIVE {
     color: gold;
     background-color: transparent;
 }
 .Button_STAR_NEGATIVE {
+    color: gray;
+    background-color: transparent;
+}
+.Button_DELETE {
     color: gray;
     background-color: transparent;
 }

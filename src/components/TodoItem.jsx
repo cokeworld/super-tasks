@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import './TodoItem.css';
 import Button from './Button';
 import { useEffect, useRef, useState } from 'react';
@@ -42,12 +41,12 @@ const TodoItem = ({ id, title, completed, star, editingId, onClickEditTitle, onU
                     </span>
                 </>
             )}
-            <Button text={'삭제'} onClick={() => onDelete(id)} />
             <Button
                 text={'★'}
                 onClick={() => onUpdate(id, { star: !star })}
                 type={`STAR_${star ? 'POSITIVE' : 'NEGATIVE'}`}
             />
+            <Button text={'×'} type={'DELETE'} onClick={() => onDelete(id)} />
         </div>
     );
 };
