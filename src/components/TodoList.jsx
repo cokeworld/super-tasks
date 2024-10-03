@@ -95,7 +95,11 @@ const TodoList = ({ data }) => {
                     <option value={'star'}>별표 표시 할 일</option>
                     <option value={'completed'}>완료된 할 일</option>
                 </select>
-                <Button onClick={onClickToggleNewInput} text={'추가'} type={'POSITIVE'} />
+                <Button
+                    onClick={onClickToggleNewInput}
+                    text={`${newInput.show ? '접기' : '추가'}`}
+                    type={`${newInput.show ? '' : 'POSITIVE'}`}
+                />
             </div>
             <div className="newInputArea">
                 {newInput.show ? (

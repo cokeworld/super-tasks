@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Header from '../components/Header';
+import usePageTitle from '../hooks/usePageTitle';
 
 const DevInfo = () => {
     const nav = useNavigate();
+    usePageTitle('개발자 정보 - Super Tasks')
+
     return (
         <div style={{ textAlign: 'center' }}>
             <Header title={'개발자 정보'} />
