@@ -3,8 +3,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/Notfound';
-import New from './pages/New';
-import Edit from './pages/Edit';
+import DevInfo from './pages/DevInfo';
 
 const storedData = localStorage.getItem('storedTodoListData')
     ? JSON.parse(localStorage.getItem('storedTodoListData'))
@@ -51,8 +50,7 @@ function App() {
                 <TodoDispatchContext.Provider value={{ onCreate, onDelete, onUpdate }}>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/new" element={<New />} />
-                        <Route path="/edit/:id" element={<Edit />} />
+                        <Route path="/info" element={<DevInfo />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </TodoDispatchContext.Provider>
