@@ -71,7 +71,6 @@ function App() {
     };
 
     const onUpdate = (id, updateData) => {
-        console.log('onUpdate', updateData);
         dispatch({ type: 'UPDATE', payload: { ...updateData, id } });
     };
 

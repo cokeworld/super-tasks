@@ -2,29 +2,25 @@ import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import TodoItem from './TodoItem';
 import './TodoList.css';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { TodoDispatchContext } from '../App';
 
 const TodoList = ({ data }) => {
-    //TODO: 셀렉트박스 변경에 따른 정렬 구현
-
     const { onCreate, onUpdate, onDelete } = useContext(TodoDispatchContext);
     const [sortType, setSortType] = useState('newest');
+    const [filteredData, setFilteredData] = useState(data);
+    const [editingId, setEditingId] = useState(0);
 
-    // TODO: data의 크기에 따라 초기화
     const idRef = useRef(data.length + 1);
 
     const [newInput, setNewInput] = useState({ value: '', show: false });
 
     const onClickToggleNewInput = () => {
-        console.log('할 일 추가');
         const changeShow = !newInput.show;
         setNewInput({ ...newInput, show: changeShow });
     };
 
     const onChangeNewInput = (e) => {
-        console.log(e.target.value);
-
         setNewInput({ ...newInput, value: e.target.value });
     };
 
@@ -51,30 +47,41 @@ const TodoList = ({ data }) => {
     };
 
     const onChangeSortType = (e) => {
-        console.log(e.target.value);
-        const sortType = e.target.value;
-        setSortType(sortType);
+        setSortType(e.target.value);
+    };
+
+    const onClickEditTitle = (id) => {
+        setEditingId(id);
     };
 
     const nav = useNavigate();
 
-    let filteredData = [];
-    switch (sortType) {
-        case 'newest':
-            filteredData = data.filter((item) => !item.completed).sort((a, b) => b.createdData - a.createdData);
-            break;
-        case 'oldest':
-            filteredData = data.filter((item) => !item.completed).sort((a, b) => a.createdData - b.createdData);
-            break;
-        case 'completed':
-            filteredData = data.filter((item) => item.completed).sort((a, b) => b.createdData - a.createdData);
-            break;
-        case 'star':
-            filteredData = data.filter((item) => !item.completed && item.star).sort((a, b) => b.createdData - a.createdData);
-            break;
-        default:
-            filteredData = data.filter((item) => !item.completed).sort((a, b) => b.createdData - a.createdData);
-    }
+    useEffect(() => {
+        let filteredDataTemp = [];
+        switch (sortType) {
+            case 'newest':
+                filteredDataTemp = data.filter((item) => !item.completed).sort((a, b) => b.createdData - a.createdData);
+                break;
+            case 'oldest':
+                filteredDataTemp = data.filter((item) => !item.completed).sort((a, b) => a.createdData - b.createdData);
+                break;
+            case 'completed':
+                filteredDataTemp = data.filter((item) => item.completed).sort((a, b) => b.createdData - a.createdData);
+                break;
+            case 'star':
+                filteredDataTemp = data
+                    .filter((item) => !item.completed && item.star)
+                    .sort((a, b) => b.createdData - a.createdData);
+                break;
+            default:
+                filteredDataTemp = data.filter((item) => !item.completed).sort((a, b) => b.createdData - a.createdData);
+        }
+        setFilteredData(filteredDataTemp);
+    }, [sortType, data]);
+
+    useEffect(() => {
+        setEditingId(0);
+    }, [filteredData]);
 
     return (
         <div className="TodoList">
@@ -82,8 +89,8 @@ const TodoList = ({ data }) => {
                 <select onChange={onChangeSortType}>
                     <option value={'newest'}>최근 순</option>
                     <option value={'oldest'}>오래된 순</option>
-                    <option value={'completed'}>완료된 할 일</option>
                     <option value={'star'}>별표 표시 할 일</option>
+                    <option value={'completed'}>완료된 할 일</option>
                 </select>
                 <Button onClick={onClickToggleNewInput} text={'할 일 추가'} type={'POSITIVE'} />
             </div>
@@ -104,6 +111,9 @@ const TodoList = ({ data }) => {
                         id={item.id}
                         title={item.title}
                         completed={item.completed}
+                        star={item.star}
+                        editingId={editingId}
+                        onClickEditTitle={onClickEditTitle}
                         onUpdate={onClickUpdate}
                         onDelete={onClickDelete}
                     />
