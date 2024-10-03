@@ -18,9 +18,9 @@ const DevInfo = () => {
                 <p>
                     {serviceTitle} 개발자 <b>김태경</b>입니다.
                 </p>
-                <p>{serviceTitle}를 이용해주셔서 대단히 감사드립니다.</p>
+                <p>{serviceTitle}를 이용해주셔서 대단히 감사합니다.</p>
                 <p>{serviceTitle}를 통해 여러분의 모든 목표를 이루시기를 기원합니다.</p>
-                <p>문의사항은 아래 링크로 연락부탁드립니다.</p>
+                <p>문의사항은 아래 링크로 연락 부탁드립니다.</p>
             </section>
             <section style={{ padding: '20px 0px', borderBottom: '1px solid rgb(226, 226, 226)' }}>
                 <p>
