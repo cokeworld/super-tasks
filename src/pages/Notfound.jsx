@@ -1,5 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
+
 const NotFound = () => {
-  return <div>없는 페이지 입니다. 다시 확인 후 접속해주세요.</div>
-}
+    const nav = useNavigate();
+    return (
+        <div style={{ textAlign: 'center', padding: '50px 0px' }}>
+            <p>없는 페이지입니다.</p>
+            <p>다시 확인 후 접속해주세요.😉</p>
+            <Button text={'돌아가기'} onClick={() => nav('/')} type={'POSITIVE'} />
+        </div>
+    );
+};
 
 export default NotFound;

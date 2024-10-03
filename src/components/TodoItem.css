@@ -1,6 +1,6 @@
 .TodoItem {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     justify-content: space-between;
 
     padding: 15px 0px;
