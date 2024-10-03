@@ -2,10 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import usePageTitle from '../hooks/usePageTitle';
+import { getServiceTitle } from './../util/get-service-title';
 
 const DevInfo = () => {
+    const serviceTitle = getServiceTitle();
     const nav = useNavigate();
-    usePageTitle('개발자 정보 - Super Tasks')
+
+    usePageTitle(`개발자 정보 - ${serviceTitle}`);
 
     return (
         <div style={{ textAlign: 'center' }}>
@@ -13,10 +16,10 @@ const DevInfo = () => {
             <section style={{ padding: '20px 0px', borderBottom: '1px solid rgb(226, 226, 226)' }}>
                 <p>안녕하세요?😊</p>
                 <p>
-                    TodoList 개발자 <b>김태경</b>입니다.
+                    {serviceTitle} 개발자 <b>김태경</b>입니다.
                 </p>
-                <p>TodoList를 이용해주셔서 대단히 감사드립니다.</p>
-                <p>TodoList를 통해 여러분의 모든 목표를 이루시기를 기원합니다.</p>
+                <p>{serviceTitle}를 이용해주셔서 대단히 감사드립니다.</p>
+                <p>{serviceTitle}를 통해 여러분의 모든 목표를 이루시기를 기원합니다.</p>
                 <p>문의사항은 아래 링크로 연락부탁드립니다.</p>
             </section>
             <section style={{ padding: '20px 0px', borderBottom: '1px solid rgb(226, 226, 226)' }}>

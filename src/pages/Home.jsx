@@ -4,11 +4,11 @@ import TodoList from '../components/TodoList';
 import { TodoStateContext } from '../App';
 import Footer from '../components/Footer';
 import usePageTitle from '../hooks/usePageTitle';
+import { getServiceTitle } from '../util/get-service-title';
 
 const Home = () => {
     const data = useContext(TodoStateContext);
-
-    usePageTitle('Super Tasks - 성공의 나침반');
+    usePageTitle(`${getServiceTitle()} - 성공의 나침반`);
 
     return (
         <>
