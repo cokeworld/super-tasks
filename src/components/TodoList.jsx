@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import TodoItem from './TodoItem';
 import './TodoList.css';
@@ -14,10 +13,10 @@ const TodoList = ({ data }) => {
     const idRef = useRef(data.length + 1);
 
     const [newInput, setNewInput] = useState({ value: '', show: false });
+    const newInputRef = useRef(null);
 
     const onClickToggleNewInput = () => {
-        const changeShow = !newInput.show;
-        setNewInput({ ...newInput, show: changeShow });
+        setNewInput({ ...newInput, show: !newInput.show });
     };
 
     const onChangeNewInput = (e) => {
@@ -25,6 +24,12 @@ const TodoList = ({ data }) => {
     };
 
     const onClickCreate = () => {
+        if (!newInput.value.trim()) {
+            alert('내용을 입력해주세요😎');
+            newInputRef.current.focus();
+            return;
+        }
+
         onCreate({
             id: idRef.current++,
             title: newInput.value,
@@ -53,8 +58,6 @@ const TodoList = ({ data }) => {
     const onClickEditTitle = (id) => {
         setEditingId(id);
     };
-
-    const nav = useNavigate();
 
     useEffect(() => {
         let filteredDataTemp = [];
@@ -97,8 +100,8 @@ const TodoList = ({ data }) => {
             <div className="newInputArea">
                 {newInput.show ? (
                     <>
-                        <input onChange={onChangeNewInput} type="text" value={newInput.value} />{' '}
-                        <Button onClick={() => onClickCreate()} text={'추가 완료'} type={'POSITIVE'} />
+                        <input onChange={onChangeNewInput} type="text" value={newInput.value} ref={newInputRef} />
+                        <Button onClick={onClickCreate} text={'추가 완료'} type={'POSITIVE'} />
                     </>
                 ) : (
                     ''
