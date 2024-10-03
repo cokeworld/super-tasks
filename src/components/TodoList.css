@@ -17,8 +17,15 @@
 .TodoList .newInputArea {
     display: flex;
     justify-content: space-between;
-    gap: 20px
+    gap: 20px;
 }
+
 .TodoList .newInputArea input {
-    flex: 1
+    flex: 1;
+}
+
+.TodoList .noData {
+    font-size: 18px;
+    text-align: center;
+    padding: 80px 0px 0px 0px;
 }

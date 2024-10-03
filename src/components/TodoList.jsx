@@ -105,19 +105,29 @@ const TodoList = ({ data }) => {
                 )}
             </div>
             <div>
-                {filteredData.map((item) => (
-                    <TodoItem
-                        key={item.id}
-                        id={item.id}
-                        title={item.title}
-                        completed={item.completed}
-                        star={item.star}
-                        editingId={editingId}
-                        onClickEditTitle={onClickEditTitle}
-                        onUpdate={onClickUpdate}
-                        onDelete={onClickDelete}
-                    />
-                ))}
+                {filteredData.length ? (
+                    <>
+                        {filteredData.map((item) => (
+                            <TodoItem
+                                key={item.id}
+                                id={item.id}
+                                title={item.title}
+                                completed={item.completed}
+                                star={item.star}
+                                editingId={editingId}
+                                onClickEditTitle={onClickEditTitle}
+                                onUpdate={onClickUpdate}
+                                onDelete={onClickDelete}
+                            />
+                        ))}
+                    </>
+                ) : (
+                    <div className="noData">
+                        <p>할 일이 없어요.</p>
+                        <p>할 일 추가해볼까요?</p>
+                        <p>😀</p>
+                    </div>
+                )}
             </div>
         </div>
     );
