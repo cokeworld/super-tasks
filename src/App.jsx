@@ -12,18 +12,32 @@ const mockData = [
         title: 'Todo 1',
         createdData: new Date().getTime(),
         completed: false,
-        star: false
+        star: true
     },
     {
         id: 2,
         title: 'true',
         createdData: new Date().getTime(),
-        completed: true,
+        completed: false,
         star: false
     },
     {
         id: 3,
         title: 'Todo 3',
+        createdData: new Date().getTime(),
+        completed: false,
+        star: false
+    },
+    {
+        id: 4,
+        title: 'Todo 4',
+        createdData: new Date().getTime(),
+        completed: false,
+        star: false
+    },
+    {
+        id: 5,
+        title: 'Todo 5',
         createdData: new Date().getTime(),
         completed: false,
         star: false
@@ -37,7 +51,7 @@ const reducer = (state, action) => {
             resultState = [action.payload, ...state];
             break;
         case 'UPDATE':
-            resultState = state.map((item) => (item.id === action.payload.id ? action.payload : item));
+            resultState = state.map((item) => (item.id === action.payload.id ? { ...item, ...action.payload } : item));
             break;
         case 'DELETE':
             resultState = state.filter((item) => item.id !== action.payload.id);
@@ -56,12 +70,13 @@ function App() {
         dispatch({ type: 'CREATE', payload: todo });
     };
 
-    const onDelete = (id) => {
-        dispatch({ type: 'DELETE', payload: id });
+    const onUpdate = (id, updateData) => {
+        console.log('onUpdate', updateData);
+        dispatch({ type: 'UPDATE', payload: { ...updateData, id } });
     };
 
-    const onUpdate = (id, todo) => {
-        dispatch({ type: 'UPDATE', payload: { ...todo, id } });
+    const onDelete = (id) => {
+        dispatch({ type: 'DELETE', payload: { id } });
     };
 
     return (

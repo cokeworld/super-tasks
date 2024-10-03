@@ -2,22 +2,18 @@ import { useNavigate } from 'react-router-dom';
 import './TodoItem.css';
 import Button from './Button';
 
-const TodoItem = ({ id, title, completed, star, onCreate, onUpdate }) => {
-    // TODO: 버튼 클릭에 따른 동작 구현
-    
+const TodoItem = ({ id, title, completed, star, onCreate, onUpdate, onDelete }) => {
     const nav = useNavigate();
 
-    const onClickDelete = () => {
-
-    }
     return (
-        <li className='TodoItem'>
-            <input name="completed" type="checkbox" checked={completed ? 'checked' : ''} />
-            <span className='item_title'>{title}</span>
+        <div className="TodoItem">
+            <input onChange ={() => onUpdate(id, {completed: !completed})} className="item_checkbox" name="completed" type="checkbox" checked={completed ? 'checked' : ''} />
+            <span className="item_title">{title}</span>
             <Button text={'수정'} />
-            <Button text={'삭제'} />
-            <Button text={'별표'} />
-        </li>
+            <Button text={'삭제'} onClick={() => onDelete(id)}/>
+            <Button text={'★'} type={'STAR_POSITIVE'} />
+            <Button text={'★'} type={'STAR_NEGATIVE'} />
+        </div>
     );
 };
 

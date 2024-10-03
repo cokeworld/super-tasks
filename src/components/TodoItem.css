@@ -1,12 +1,19 @@
 .TodoItem {
-  display: flex;
-  gap: 15px;
-  justify-content: space-between;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
 
-  padding: 15px 0px;
-  border-bottom: 1px solid rgb(236, 236, 236);
+    padding: 15px 0px;
+    border-bottom: 1px solid rgb(236, 236, 236);
 }
 
 .TodoItem .item_title {
-  flex: 1
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.TodoItem .item_checkbox {
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5); /* 벤더 프리픽스: 크롬, 사파리 호환성 */
 }

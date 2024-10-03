@@ -8,7 +8,7 @@ import { TodoDispatchContext } from '../App';
 const TodoList = ({ data }) => {
     //TODO: 셀렉트박스 변경에 따른 정렬 구현
 
-    const { onCreate } = useContext(TodoDispatchContext);
+    const { onCreate, onUpdate, onDelete } = useContext(TodoDispatchContext);
     const idRef = useRef(4);
 
     const [newInput, setNewInput] = useState({ value: '', show: false });
@@ -25,9 +25,7 @@ const TodoList = ({ data }) => {
         setNewInput({ ...newInput, value: e.target.value });
     };
 
-    const onClickSubmit = () => {
-        console.log('onClickSubmit');
-
+    const onClickCreate = () => {
         onCreate({
             id: idRef.current++,
             title: newInput.value,
@@ -35,9 +33,24 @@ const TodoList = ({ data }) => {
             completed: false,
             star: false
         });
+
+        setNewInput({ ...newInput, value: '' });
+    };
+
+    const onClickUpdate = (id, updateData) => {
+        onUpdate(id, updateData);
+    }
+
+    const onClickDelete = (id) => {
+        if (confirm('삭제하시겠습니까?')) {
+            onDelete(id);
+        }
     };
 
     const nav = useNavigate();
+
+    const filteredData = data.filter((item) => !item.completed);
+
     return (
         <div className="TodoList">
             <div className="menu_bar">
@@ -53,17 +66,24 @@ const TodoList = ({ data }) => {
                 {newInput.show ? (
                     <>
                         <input onChange={onChangeNewInput} type="text" value={newInput.value} />{' '}
-                        <Button onClick={() => onClickSubmit()} text={'완료'} type={'POSITIVE'} />
+                        <Button onClick={() => onClickCreate()} text={'추가 완료'} type={'POSITIVE'} />
                     </>
                 ) : (
                     ''
                 )}
             </div>
-            <ul>
-                {data.map((item) => (
-                    <TodoItem key={item.id} id={item.id} title={item.title} completed={item.completed} />
+            <div>
+                {filteredData.map((item) => (
+                    <TodoItem
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        completed={item.completed}
+                        onUpdate={onClickUpdate}
+                        onDelete={onClickDelete}
+                    />
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

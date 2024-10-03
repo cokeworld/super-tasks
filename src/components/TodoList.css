@@ -13,3 +13,12 @@
     font-size: 18px;
     cursor: pointer;
 }
+
+.TodoList .newInputArea {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px
+}
+.TodoList .newInputArea input {
+    flex: 1
+}
