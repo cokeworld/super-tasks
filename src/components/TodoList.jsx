@@ -95,7 +95,7 @@ const TodoList = ({ data }) => {
                     <option value={'star'}>별표 표시 할 일</option>
                     <option value={'completed'}>완료된 할 일</option>
                 </select>
-                <Button onClick={onClickToggleNewInput} text={'할 일 추가'} type={'POSITIVE'} />
+                <Button onClick={onClickToggleNewInput} text={'추가'} type={'POSITIVE'} />
             </div>
             <div className="newInputArea">
                 {newInput.show ? (
@@ -127,7 +127,7 @@ const TodoList = ({ data }) => {
                 ) : (
                     <div className="noData">
                         <p>할 일이 없어요.</p>
-                        <p>할 일 추가해볼까요?</p>
+                        <p>추가해볼까요?</p>
                         <p>😀</p>
                     </div>
                 )}
