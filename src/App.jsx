@@ -6,43 +6,9 @@ import NotFound from './pages/Notfound';
 import New from './pages/New';
 import Edit from './pages/Edit';
 
-const mockData = [
-    {
-        id: 1,
-        title: 'Todo 1',
-        createdData: new Date().getTime() + 1,
-        completed: false,
-        star: true
-    },
-    {
-        id: 2,
-        title: 'true',
-        createdData: new Date().getTime() + 2,
-        completed: false,
-        star: false
-    },
-    {
-        id: 3,
-        title: 'Todo 3',
-        createdData: new Date().getTime() + 3,
-        completed: false,
-        star: false
-    },
-    {
-        id: 4,
-        title: 'Todo 4',
-        createdData: new Date().getTime() + 4,
-        completed: false,
-        star: false
-    },
-    {
-        id: 5,
-        title: 'Todo 5',
-        createdData: new Date().getTime() + 5,
-        completed: false,
-        star: false
-    }
-];
+const storedData = localStorage.getItem('storedTodoListData')
+    ? JSON.parse(localStorage.getItem('storedTodoListData'))
+    : [];
 
 const reducer = (state, action) => {
     let resultState = state;
@@ -57,6 +23,7 @@ const reducer = (state, action) => {
             resultState = state.filter((item) => item.id !== action.payload.id);
             break;
     }
+    localStorage.setItem('storedTodoListData', JSON.stringify(resultState));
     return resultState;
 };
 
@@ -64,7 +31,7 @@ export const TodoDispatchContext = createContext();
 export const TodoStateContext = createContext();
 
 function App() {
-    const [data, dispatch] = useReducer(reducer, mockData);
+    const [data, dispatch] = useReducer(reducer, storedData);
 
     const onCreate = (todo) => {
         dispatch({ type: 'CREATE', payload: todo });

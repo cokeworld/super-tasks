@@ -32,7 +32,7 @@ const TodoItem = ({ id, title, completed, star, editingId, onClickEditTitle, onU
                         ref={inputRef}
                         onChange={(e) => setEditTitle(e.target.value)}
                     />
-                    <Button text={'수정완료'} onClick={() => onUpdate(id, { title: editTitle })} />
+                    <Button text={'수정완료'} type={'POSITIVE'} onClick={() => onUpdate(id, { title: editTitle })} />
                 </>
             ) : (
                 <>
