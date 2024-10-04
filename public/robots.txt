@@ -1,0 +1,3 @@
+User-agent: *
+Allow:/
+Sitemap: https://super-tasks.vercel.app/sitemap.xml
